@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Egypt FWD &vert; Weather App</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <div class="bg-image filter blur"></div>
+
+    <div class="card">
+      <div class="card-text">
+        <div class="justify-self-start">
+          <ion-icon class="w-10 h-10" name="cloudy-outline"></ion-icon>
+          <div>
+            <p id="weather">Weather</p>
+          </div>
+        </div>
+
+        <div class="justify-self-end">
+          <p id="city">City</p>
+          <p id="date">Today's Day</p>
+          <p>
+            <span id="temp">0</span>
+            &#8451;
+          </p>
+        </div>
+
+        <div class="col-span-2 justify-self-center text-center">
+          <p id="content">Feeling</p>
+        </div>
+      </div>
+      <input
+        id="zip"
+        class="user-input"
+        type="text"
+        placeholder="Enter zip code here"
+      />
+      <input
+        id="feelings"
+        class="user-input"
+        type="text"
+        placeholder="How do you feel?"
+      />
+      <button id="generate" class="btn">Generate</button>
+    </div>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
