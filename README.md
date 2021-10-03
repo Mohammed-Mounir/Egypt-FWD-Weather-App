@@ -7,14 +7,13 @@ An asynchronous web app that uses Web API and user data to dynamically update th
 ## Features
 
 - Using OpenWeatherMap API.
-- User enters city id and their response (feeling).
+- User enters a zip code and their response (feeling).
 - A generate button to display the following:
-	- City Name.
-	- City Weather.
-	- Today's Day.
-	- City Temperature in Celsius Unit.
-	- User Response.
-	
+  - City Name.
+  - City Weather.
+  - Today's Day.
+  - City Temperature in Celsius Unit.
+  - User Response.
 
 ## Tech stack
 

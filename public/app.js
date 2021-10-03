@@ -25,12 +25,12 @@ const apiKey = "46ac6cf49501cb639343c8e4dabcd677";
 
 // Base OpenWeather Url
 const baseUrl =
-  "https://api.openweathermap.org/data/2.5/weather?id={city id}&appid={API key}&units=metric";
+  "https://api.openweathermap.org/data/2.5/weather?zip={zip code}&appid={API key}&units=metric";
 
 /* Function called by event listener */
 const generateWeatherData = () => {
   getWeatherData(
-    baseUrl.replace("{city id}", zipCode.value).replace("{API key}", apiKey)
+    baseUrl.replace("{zip code}", zipCode.value).replace("{API key}", apiKey)
   ).then((data) => {
     const weatherData = {
       temp: data.main.temp,
