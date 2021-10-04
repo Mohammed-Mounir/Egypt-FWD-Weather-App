@@ -28,28 +28,28 @@ const baseUrl =
   "https://api.openweathermap.org/data/2.5/weather?zip={zip code}&appid={API key}&units=metric";
 
 /* Function called by event listener */
-const generateWeatherData = () => {
-  getWeatherData(
-    baseUrl.replace("{zip code}", zipCode.value).replace("{API key}", apiKey)
-  ).then((data) => {
-    const weatherData = {
-      temp: data.main.temp,
-      date: todayDay,
-      userResponse: userfeelings.value,
-      weather: data.weather[0].main,
-      city: data.name,
-    };
-    postData("/add", weatherData).then((res) => {
-      console.log(res.msg);
-      getProjectData("/all").then((data) => {
-        temp.innerHTML = data.temp;
-        date.innerHTML = data.date;
-        content.innerHTML = data.userResponse;
-        weather.innerHTML = data.weather;
-        city.innerHTML = data.city;
-      });
-    });
-  });
+const generateWeatherData = async () => {
+  const url = baseUrl
+    .replace("{zip code}", zipCode.value)
+    .replace("{API key}", apiKey);
+  const data = await getWeatherData(url);
+  const weatherData = {
+    temp: Math.round(data.main.temp),
+    date: todayDay,
+    userResponse: userfeelings.value,
+    weather: data.weather[0].main,
+    city: data.name,
+  };
+
+  const res = await postData("/add", weatherData);
+  console.log(res.msg);
+
+  const projectData = await getProjectData("/all");
+  temp.innerHTML = projectData.temp;
+  date.innerHTML = projectData.date;
+  content.innerHTML = projectData.userResponse;
+  weather.innerHTML = projectData.weather;
+  city.innerHTML = projectData.city;
 };
 
 // Event listener to add function to existing HTML DOM element
@@ -58,38 +58,30 @@ btnGenerate.addEventListener("click", generateWeatherData);
 /* Function to GET Web API Data*/
 const getWeatherData = async (url) => {
   try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
+    const response = await axios.get(url);
+    return response.data;
   } catch (err) {
-    console.log("Error: " + err);
+    console.log(err);
   }
 };
 
 /* Function to POST data */
-const postData = async (url, data) => {
+const postData = async (url, postData) => {
   try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const msg = await response.json();
-    return msg;
+    const axiosConfig = { headers: { "Content-Type": "application/json" } };
+    const response = await axios.post(url, postData, axiosConfig);
+    return response.data;
   } catch (err) {
-    console.log("Error: " + err);
+    console.log(err);
   }
 };
 
 /* Function to GET Project Data */
 const getProjectData = async (url) => {
   try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
+    const response = await axios.get(url);
+    return response.data;
   } catch (err) {
-    console.log("Error: " + err);
+    console.log(err);
   }
 };
