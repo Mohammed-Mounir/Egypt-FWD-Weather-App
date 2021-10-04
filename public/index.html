@@ -34,19 +34,23 @@
           <p id="content">Feeling</p>
         </div>
       </div>
-      <input
-        id="zip"
-        class="user-input"
-        type="text"
-        placeholder="Enter zip code here"
-      />
-      <input
-        id="feelings"
-        class="user-input"
-        type="text"
-        placeholder="How do you feel?"
-      />
-      <button id="generate" class="btn">Generate</button>
+      <form action="#" method="post">
+        <input
+          id="zip"
+          class="user-input"
+          type="text"
+          placeholder="Enter zip code here"
+          required
+        />
+        <input
+          id="feelings"
+          class="user-input"
+          type="text"
+          placeholder="How do you feel?"
+          required
+        />
+        <button id="generate" class="btn">Generate</button>
+      </form>
     </div>
 
     <script

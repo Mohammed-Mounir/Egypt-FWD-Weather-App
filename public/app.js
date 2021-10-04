@@ -28,28 +28,41 @@ const baseUrl =
   "https://api.openweathermap.org/data/2.5/weather?zip={zip code}&appid={API key}&units=metric";
 
 /* Function called by event listener */
-const generateWeatherData = async () => {
-  const url = baseUrl
-    .replace("{zip code}", zipCode.value)
-    .replace("{API key}", apiKey);
-  const data = await getWeatherData(url);
-  const weatherData = {
-    temp: Math.round(data.main.temp),
-    date: todayDay,
-    userResponse: userfeelings.value,
-    weather: data.weather[0].main,
-    city: data.name,
-  };
+const generateWeatherData = async (evt) => {
+  evt.preventDefault();
 
-  const res = await postData("/add", weatherData);
-  console.log(res.msg);
+  const code = parseInt(zipCode.value);
+  if (!code) {
+    content.innerHTML = "Please enter the zip code in a number format";
+    return;
+  }
 
-  const projectData = await getProjectData("/all");
-  temp.innerHTML = projectData.temp;
-  date.innerHTML = projectData.date;
-  content.innerHTML = projectData.userResponse;
-  weather.innerHTML = projectData.weather;
-  city.innerHTML = projectData.city;
+  try {
+    const url = baseUrl
+      .replace("{zip code}", code)
+      .replace("{API key}", apiKey);
+    const data = await getWeatherData(url);
+    const weatherData = {
+      temp: Math.round(data.main.temp),
+      date: todayDay,
+      userResponse: userfeelings.value,
+      weather: data.weather[0].main,
+      city: data.name,
+    };
+
+    const res = await postData("/add", weatherData);
+    console.log(res.msg);
+
+    const projectData = await getProjectData("/all");
+    temp.innerHTML = projectData.temp;
+    date.innerHTML = projectData.date;
+    content.innerHTML = projectData.userResponse;
+    weather.innerHTML = projectData.weather;
+    city.innerHTML = projectData.city;
+  } catch (err) {
+    content.innerHTML = "Please enter a valid zip code";
+    console.log(err);
+  }
 };
 
 // Event listener to add function to existing HTML DOM element
