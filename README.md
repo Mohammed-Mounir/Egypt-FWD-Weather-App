@@ -6,7 +6,7 @@ An asynchronous web app that uses Web API and user data to dynamically update th
 
 ## Features
 
-- Using OpenWeatherMap API.
+- Uses OpenWeatherMap API.
 - User enters a zip code and their response (feeling).
 - A generate button to display the following:
   - City Name.
@@ -17,5 +17,5 @@ An asynchronous web app that uses Web API and user data to dynamically update th
 
 ## Tech stack
 
-- Client-Side using (Vanilla JavaScript, Tailwind CSS and Ionicons).
+- Client-Side using (JavaScript, Axios, Tailwind CSS (JIT) and Ionicons).
 - Server-Side using (Node.js and Express.js).
